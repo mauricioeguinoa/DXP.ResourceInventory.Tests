@@ -1,0 +1,20 @@
+{
+  "name": "dxp_aut_resourceinventory",
+  "version": "1.0.0",
+  "description": "Pruebas Automatizadas API DXP ResourceIventory",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "DEV-PU-ResourceInventory-NEG": "newman run tests/DXP.PU.AUT.ResourceInventory.NEG.postman_collection.json -e tests/DataPower.DXP.DEV.postman_environment.json -r junit --reporter-junit-export newmanPU.xml",
+    "DEV-PI-ResourceInventory-NEG": "newman run tests/DXP.PI.AUT.ResourceInventory.NEG.postman_collection.json -e tests/DataPower.DXP.DEV.postman_environment.json -d tests/Data.DXP.PI.ResourceInventory.csv -r junit --reporter-junit-export newmanPI.xml",
+    "TEST-PU-ResourceInventory-NEG": "newman run tests/DXP.PU.AUT.ResourceInventory.NEG.postman_collection.json -e tests/DataPower.DXP.TEST.postman_environment.json -r junit --reporter-junit-export newmanPU.xml",
+    "TEST-PI-ResourceInventory-NEG": "newman run tests/DXP.PI.AUT.ResourceInventory.NEG.postman_collection.json -e tests/DataPower.DXP.TEST.postman_environment.json -d tests/Data.DXP.PI.ResourceInventory.csv -r junit --reporter-junit-export newmanPI.xml",
+    "UAT-PU-ResourceInventory-NEG": "newman run tests/DXP.PU.AUT.ResourceInventory.NEG.postman_collection.json -e tests/DataPower.DXP.UAT.postman_environment.json -r junit --reporter-junit-export newmanPU.xml",
+    "UAT-PI-ResourceInventory-NEG": "newman run tests/DXP.PI.AUT.ResourceInventory.NEG.postman_collection.json -e tests/DataPower.DXP.UAT.postman_environment.json -d tests/Data.DXP.PI.ResourceInventory.csv -r junit --reporter-junit-export newmanPI.xml"
+  },
+  "author": "DXP.QA",
+  "dependencies": {
+    "newman": "^4.5.6"
+  }
+}

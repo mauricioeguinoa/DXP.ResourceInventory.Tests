@@ -1,0 +1,108 @@
+{
+	"info": {
+		"_postman_id": "0bcb4852-88ed-4ad8-897d-bab793e889fa",
+		"name": "DXP.PI.AUT.ResourceInventory.NEG",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "DXP.PI.ResourceInventory.NEG/resource/{ip}.Con un unico parametro ip correcto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "baf714fc-df34-4700-b3c4-c44f30d858d4",
+						"exec": [
+							"// Functions",
+							"function validaCampoArroba(field){",
+							"    var texto=\"\";",
+							"    for(var i=0; i<field.length; i++){",
+							"        var aux = field.split(\":\");",
+							"        for(var j=1;j<aux[1].length; j++){",
+							"            texto = texto.concat(aux[1][j]);",
+							"            if(aux[1][j+1] === \"\\\"\"){",
+							"                j=aux[1].length;",
+							"            }",
+							"        }",
+							"        i=field.length;",
+							"    }",
+							"    return texto;",
+							"}",
+							"",
+							"// Variable declarations",
+							"function validaValor(value,field){",
+							"    value = value.trim();",
+							"    value = value.replace( /\\s\\s+/g, ' ' ); // Reemplazo espacio al final por vacio",
+							"    value = value.replace(/,/g, '#' ); // Remplazo pipe por coma",
+							"",
+							"    console.log (\"value (json):\"+value);",
+							"    console.log (\"field (csv):\"+field);",
+							"    ",
+							"       if(field == value){",
+							"            return true;",
+							"        }else{",
+							"            return false;",
+							"        }",
+							"}",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"\tpm.test(data.testname+\" Valida status 200\", function () {",
+							"\tpm.response.to.have.status(200);",
+							"\t});",
+							"",
+							"    pm.test(\"Validate first country\",()=> {",
+							"    pm.expect(jsonData.characteristic).to.have.property(\"country\");",
+							"    pm.expect(validaValor(jsonData.characteristic.country,data.country)).to.be.true;",
+							"    });",
+							"    ",
+							"    pm.test(\"Validate first stateOrProvince\",()=> {",
+							"    pm.expect(jsonData.characteristic).to.have.property(\"stateOrProvince\");",
+							"    pm.expect(validaValor(jsonData.characteristic.stateOrProvince,data.stateOrProvince)).to.be.true;",
+							"\t});",
+							"\t",
+							"\tpm.test(\"Validate city\",()=> {",
+							"    pm.expect(jsonData.characteristic).to.have.property(\"city\");",
+							"    pm.expect(validaValor(jsonData.characteristic.city,data.city)).to.be.true;",
+							"    });",
+							"\t",
+							"\tpm.test(\"Validate locality\",()=> {",
+							"    pm.expect(jsonData.characteristic).to.have.property(\"locality\");",
+							"    pm.expect(validaValor(jsonData.characteristic.locality,data.locality)).to.be.true;",
+							"    });",
+							"\t",
+							"\tpm.test(\"Validate x\",()=> {",
+							"    pm.expect(jsonData.characteristic).to.have.property(\"x\");",
+							"    pm.expect(validaValor(jsonData.characteristic.x,data.x)).to.be.true;",
+							"    });",
+							"\t",
+							"\tpm.test(\"Validate y\",()=> {",
+							"    pm.expect(jsonData.characteristic).to.have.property(\"y\");",
+							"    pm.expect(validaValor(jsonData.characteristic.y,data.y)).to.be.true;",
+							"    });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/ResourceInventory/v1/resource/{{ip}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"ResourceInventory",
+						"v1",
+						"resource",
+						"{{ip}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
